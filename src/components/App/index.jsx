@@ -13,7 +13,16 @@ const App = ({ recipes }) => (
 );
 
 App.propTypes = {
-	recipes: PropTypes.array
+	recipes: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string,
+			title: PropTypes.string,
+			timeToCook: PropTypes.number,
+			portions: PropTypes.number,
+			ingredients: PropTypes.string,
+			instructions: PropTypes.string
+		})
+	)
 };
 
 const mapStateToProps = state => ({
