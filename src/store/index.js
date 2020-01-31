@@ -1,13 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-// Import reducers
-
-/* Combine reducers
- *
- * reducerKey: reducerValue
- *
- */
 const rootReducer = combineReducers({});
 
 const composeEnchancers =
