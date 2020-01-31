@@ -1,7 +1,26 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import PropTypes from 'prop-types';
 
-function App() {
-	return <p>This is the App component!</p>;
-}
+import { getRecipes } from './selectors';
 
-export default App;
+const App = ({ recipes }) => (
+	<div>
+		{recipes && recipes.map(({ id, title }) => <p key={id}>{title}</p>)}
+	</div>
+);
+
+App.propTypes = {
+	recipes: PropTypes.array
+};
+
+const mapStateToProps = state => ({
+	recipes: getRecipes(state)
+});
+
+export default compose(
+	firestoreConnect(() => ['recipes']),
+	connect(mapStateToProps)
+)(App);
