@@ -1,23 +1,26 @@
 /* Dark Theme styles */
 .app--theme-dark {
 	background-color: $grey;
+	transition: background-color .3s;
 
 	/* Header */
 	.header {
-		border-top: $unit * 2 solid $grey-darker;
+		border-top-color: $grey-darker;
 		background-color: $grey-lighter;
+		transition: background-color .3s, border-color .3s;
 	}
 
 	/* Theme switcher */
 	.theme-switcher {
 		.material-icons--light {
-			display: none;
+			opacity: 0;
 		}
 	}
 
 	/* Footer */
 	.footer {
 		background-color: $grey-lighter;
-		color: rgba($white, .6);		
+		color: rgba($white, .6);
+		transition: background-color .3s, color .3s;
 	}
 }

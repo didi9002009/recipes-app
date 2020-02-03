@@ -10,4 +10,18 @@
 	cursor: pointer;
 	appearance: none;
 	outline: none;
+	user-select: none;
+	position: relative;
+
+	.material-icons--dark {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 10;
+	}
+
+	.material-icons--dark,
+	.material-icons--light {
+		transition: opacity .3s;
+	}
 }

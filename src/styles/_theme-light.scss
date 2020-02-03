@@ -1,24 +1,27 @@
 /* Light Theme styles */
 .app--theme-light {
 	background-color: $white;
+	transition: background-color .3s;
 
 	/* Header */
 	.header {
+		border-top-color: $purple-darker;
 		background-color: $purple;
-		border-top: $unit * 2 solid $purple-darker;
+		transition: background-color .3s, border-color .3s;
 	}
 
 	/* Theme switcher */
 	.theme-switcher {
 		.material-icons--dark {
-			display: none;
+			opacity: 0;
 		}
 	}
 
 	/* Footer */
 	.footer {
 		background-color: $white-darker;
-		color: rgba($grey-darker, .6);		
+		color: rgba($grey-darker, .6);	
+		transition: background-color .3s, color .3s;
 	}
 }
 
