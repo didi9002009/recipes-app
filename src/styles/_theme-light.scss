@@ -1,1 +1,24 @@
 /* Light Theme styles */
+.app--theme-light {
+	background-color: $white;
+
+	/* Header */
+	.header {
+		background-color: $purple;
+		border-top: $unit * 2 solid $purple-darker;
+	}
+
+	/* Theme switcher */
+	.theme-switcher {
+		.material-icons--dark {
+			display: none;
+		}
+	}
+
+	/* Footer */
+	.footer {
+		background-color: $white-darker;
+		color: rgba($grey-darker, .6);		
+	}
+}
+

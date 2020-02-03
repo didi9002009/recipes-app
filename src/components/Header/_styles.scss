@@ -1,10 +1,18 @@
 /* Header component styles */
 .header {
+	width: 100%;
+	color: $white;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 999;
+
 	&__content {
 		display: flex;
 		flex-flow: row nowrap;
 		align-items: center;
 		justify-content: space-between;
+		padding: $unit * 2.5 0;
 	}
 
 	h1 {

@@ -1,1 +1,23 @@
 /* Dark Theme styles */
+.app--theme-dark {
+	background-color: $grey;
+
+	/* Header */
+	.header {
+		border-top: $unit * 2 solid $grey-darker;
+		background-color: $grey-lighter;
+	}
+
+	/* Theme switcher */
+	.theme-switcher {
+		.material-icons--light {
+			display: none;
+		}
+	}
+
+	/* Footer */
+	.footer {
+		background-color: $grey-lighter;
+		color: rgba($white, .6);		
+	}
+}

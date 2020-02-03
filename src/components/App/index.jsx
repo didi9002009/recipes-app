@@ -11,22 +11,30 @@ import { setThemeDark } from './actions';
 import Header from '../Header';
 import Footer from '../Footer';
 
-const App = ({ setThemeDark, isDarkTheme }) => {
-	setThemeDark();
+class App extends React.Component {
+	componentDidMount() {
+		const { setThemeDark } = this.props;
 
-	return (
-		<div
-			className={classNames(
-				'app',
-				{ 'app--theme-dark': isDarkTheme },
-				{ 'app--theme-light': !isDarkTheme }
-			)}
-		>
-			<Header />
-			<Footer />
-		</div>
-	);
-};
+		setThemeDark();
+	}
+
+	render() {
+		const { isDarkTheme } = this.props;
+
+		return (
+			<div
+				className={classNames(
+					'app',
+					{ 'app--theme-dark': isDarkTheme },
+					{ 'app--theme-light': !isDarkTheme }
+				)}
+			>
+				<Header />
+				<Footer />
+			</div>
+		);
+	}
+}
 
 App.propTypes = {
 	setThemeDark: PropTypes.func,
