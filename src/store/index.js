@@ -9,12 +9,15 @@ import { firestoreReducer, createFirestoreInstance } from 'redux-firestore';
 
 import { fbConfig, rrfConfig } from '../config';
 
+import appReducers from '../components/App/reducer';
+
 firebase.initializeApp(fbConfig);
 firebase.firestore();
 
 const rootReducer = combineReducers({
 	firebase: firebaseReducer,
-	firestore: firestoreReducer
+	firestore: firestoreReducer,
+	app: appReducers
 });
 
 const composeEnchancers =
