@@ -9,3 +9,9 @@
 
 /* Components */
 @import '../components/App/styles';
+@import '../components/Header/styles';
+@import '../components/Footer/styles';
+
+/* Themes */
+@import './theme-dark';
+@import './theme-light';
