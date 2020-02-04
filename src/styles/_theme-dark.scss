@@ -50,3 +50,16 @@
 		color: rgba($white, .6);
 	}
 }
+
+/* NotFound */
+.not-found--theme-dark {
+	background-color: $grey;
+
+	h1 {
+		color: rgba($white, .87);
+	}
+
+	a {
+		color: $purple-lighter;
+	}
+}

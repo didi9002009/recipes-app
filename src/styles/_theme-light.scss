@@ -51,3 +51,15 @@
 	}
 }
 
+/* NotFound */
+.not-found--theme-light {
+	background-color: $white;
+
+	h1 {
+		color: rgba($grey-darker, .87);
+	}
+
+	a {
+		color: $purple;
+	}
+}

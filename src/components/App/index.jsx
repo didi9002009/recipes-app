@@ -6,19 +6,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { getAppTheme } from './selectors';
-import { setThemeDark } from './actions';
 
 import Header from '../Header';
 import List from '../List';
 import Footer from '../Footer';
 
 class App extends React.Component {
-	componentDidMount() {
-		const { setThemeDark } = this.props;
-
-		setThemeDark();
-	}
-
 	render() {
 		const { isDarkTheme } = this.props;
 
@@ -47,11 +40,7 @@ const mapStateToProps = state => ({
 	isDarkTheme: getAppTheme(state)
 });
 
-const mapDispatchToProps = {
-	setThemeDark
-};
-
 export default compose(
 	firestoreConnect(() => ['recipes']),
-	connect(mapStateToProps, mapDispatchToProps)
+	connect(mapStateToProps)
 )(App);

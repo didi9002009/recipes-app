@@ -1,0 +1,17 @@
+/* NotFound component styles */
+.not-found {
+	height: 100%;
+	padding: $unit * 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+
+	a {
+		font-weight: 700;
+		font-size: $font-size-small;
+		letter-spacing: .05em;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+}
