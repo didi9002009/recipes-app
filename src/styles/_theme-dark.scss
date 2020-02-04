@@ -1,13 +1,11 @@
 /* Dark Theme styles */
 .app--theme-dark {
 	background-color: $grey;
-	transition: background-color .3s;
 
 	/* Header */
 	.header {
 		border-top-color: $grey-darker;
 		background-color: $grey-lighter;
-		transition: background-color .3s, border-color .3s;
 	}
 
 	/* Theme switcher */
@@ -17,10 +15,37 @@
 		}
 	}
 
+	/* Card */
+	.card {
+		background-color: $grey-lighter;
+		box-shadow: inset 0 0 0 1px rgba($grey-darker, 0), 0 2px 3px rgba($grey-darker, 0);
+
+		&__title {
+			color: rgba($white, .87);
+		}
+
+		&__meta {
+			li {
+				i {
+					color: $purple-lighter;
+				}
+
+				span {
+					color: rgba($white, .6);
+				}
+			}
+		}
+
+		&__actions {
+			span {
+				color: $purple-lighter;
+			}
+		}
+	}
+
 	/* Footer */
 	.footer {
 		background-color: $grey-lighter;
 		color: rgba($white, .6);
-		transition: background-color .3s, color .3s;
 	}
 }

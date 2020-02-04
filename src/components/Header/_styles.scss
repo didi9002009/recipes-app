@@ -7,6 +7,7 @@
 	top: 0;
 	z-index: 999;
 	border-top: $unit * 2 solid $black;
+	transition: background-color .3s, border-color .3s;
 
 	&__content {
 		display: flex;

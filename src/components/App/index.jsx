@@ -9,6 +9,7 @@ import { getAppTheme } from './selectors';
 import { setThemeDark } from './actions';
 
 import Header from '../Header';
+import List from '../List';
 import Footer from '../Footer';
 
 class App extends React.Component {
@@ -30,6 +31,7 @@ class App extends React.Component {
 				)}
 			>
 				<Header />
+				<List />
 				<Footer />
 			</div>
 		);

@@ -1,0 +1,58 @@
+/* Card component styles */
+.card {
+	padding: $unit * 3;
+	border-radius: $unit;
+	transition: background-color .3s, box-shadow .3s;
+
+	&__title {
+		margin-bottom: $unit * 2;
+		transition: color .3s;
+	}
+
+	&__meta {
+		display: flex;
+		align-items: center;
+		margin: 0 0 $unit * 3;
+		padding: 0;
+		list-style: none;
+
+		li {
+			display: flex;
+			align-items: center;
+			
+			i {
+				font-size: $font-size-medium;
+			}
+			
+			span {
+				margin-left: $unit / 2;
+			}
+
+			i,
+			span {
+				transition: color .3s;
+			}
+
+			& + li {
+				margin-left: $unit * 2;
+			}
+		}
+	}
+
+	&__actions {
+		display: flex;
+		justify-content: flex-end;
+
+		span {
+			font-weight: 700;
+			font-size: $font-size-small;
+			text-transform: uppercase;
+			letter-spacing: .05em;
+			transition: color .3s;
+		}
+	}
+
+	& + .card {
+		margin-top: $unit * 2;
+	}
+}

@@ -1,6 +1,7 @@
 /* Footer component styles */
 .footer {
 	padding: $unit * 2.5 0;
+	transition: background-color .3s, color .3s;
 
 	.copyright {
 		margin: 0;
