@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { getRecipes } from '../App/selectors';
 
@@ -13,11 +14,17 @@ class List extends React.Component {
 		return recipes ? (
 			<div className='list'>
 				<div className='container'>
-					<div className='list__content'>
+					<TransitionGroup className='list__content'>
 						{recipes.map(recipe => (
-							<Card key={recipe.id} {...recipe} />
+							<CSSTransition
+								key={recipe.id}
+								timeout={300}
+								classNames='card'
+							>
+								<Card key={recipe.id} {...recipe} />
+							</CSSTransition>
 						))}
-					</div>
+					</TransitionGroup>
 				</div>
 			</div>
 		) : null;

@@ -56,4 +56,29 @@
 	& + .card {
 		margin-top: $unit * 2;
 	}
+
+	// Animations
+	&-enter {
+		opacity: 0;
+		transform: translate(0, 50%) scale(.5);
+		transform-origin: center bottom;
+
+		&-active {
+			opacity: 1;
+			transform: translate(0, 0) scale(1);
+			transition: opacity .3s, transform .3s;
+		}
+	}
+
+	&-exit {
+		opacity: 1;
+		transform: translate(0, 0) scale(1);
+		transform-origin: center bottom;
+
+		&-active {
+			opacity: 0;
+			transform: translate(0, 50%) scale(.5);
+			transition: opacity .3s, transform .3s;
+		}
+	}
 }

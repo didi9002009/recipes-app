@@ -8,6 +8,7 @@ body,
 	height: 100%;
 }
 
+/* Body */
 body {
 	margin: 0;
 	font-family: $font-family;
@@ -17,6 +18,7 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+/* Typography */
 h1,
 h2,
 h3 {
@@ -44,6 +46,7 @@ p {
 	line-height: 1.25;
 }
 
+/* Containers */
 .container {
 	max-width: 100%;
 	margin-left: auto;
@@ -52,6 +55,7 @@ p {
 	padding-right: $unit * 2;
 }
 
+/* Material icons */
 .material-icons {
 	font-family: 'Material Icons';
 	font-weight: normal;

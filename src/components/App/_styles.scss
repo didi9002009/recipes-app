@@ -1,7 +1,13 @@
 /* App component styles */
 .app {
-	height: 100%;
+	display: flex;
+	flex-flow: column;
+	min-height: 100%;
 	padding-top: $unit * 10.5;
 	position: relative;
 	transition: background-color .3s;
+
+	.list {
+		flex: 1 1 auto;
+	}
 }
