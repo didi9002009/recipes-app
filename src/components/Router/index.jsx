@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Login from '../Login';
 import App from '../App';
 import NotFound from '../NotFound';
+import PrivateRoute from '../PrivateRoute';
 
 const Router = () => {
 	// Handle App Theme change
@@ -14,9 +15,9 @@ const Router = () => {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route path='/login' component={Login} />
-				<Route path='/recipes' component={App} />
-				<Route path='' component={NotFound} />
+				<Route exact path='/login' component={Login} />
+				<PrivateRoute exact path='/recipes' component={App} />
+				<PrivateRoute path='' component={NotFound} />
 			</Switch>
 		</BrowserRouter>
 	);

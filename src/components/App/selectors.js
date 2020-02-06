@@ -15,3 +15,4 @@ export const getRecipes = createSelector(getOrdered, ({ recipes }) => recipes);
 
 export const getFirebase = ({ firebase }) => firebase;
 export const getAuth = createSelector(getFirebase, ({ auth }) => auth);
+export const getProfile = createSelector(getFirebase, ({ profile }) => profile);

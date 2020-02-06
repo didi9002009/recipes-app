@@ -22,7 +22,7 @@ export const authenticate = (credentials, history) => {
 			.then(() => {
 				dispatch(authSuccess());
 
-				history.push(homeUrl);
+				setTimeout(() => history.push(homeUrl), 1500);
 			})
 			.catch(() => {
 				dispatch(authError());
