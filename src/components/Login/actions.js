@@ -1,13 +1,17 @@
-import * as authStatus from './constants';
+import {
+	AUTHENTICATION_ERROR,
+	AUTHENTICATION_SUCCESS,
+	homeUrl
+} from './constants';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
 const authSuccess = () => ({
-	type: authStatus.AUTHENTICATION_SUCCESS
+	type: AUTHENTICATION_SUCCESS
 });
 
 const authError = () => ({
-	type: authStatus.AUTHENTICATION_ERROR
+	type: AUTHENTICATION_ERROR
 });
 
 export const authenticate = (credentials, history) => {
@@ -18,7 +22,7 @@ export const authenticate = (credentials, history) => {
 			.then(() => {
 				dispatch(authSuccess());
 
-				history.push('/recipes');
+				history.push(homeUrl);
 			})
 			.catch(() => {
 				dispatch(authError());

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { authenticate } from './actions';
+import { loginForm } from './constants';
 
 class Login extends React.Component {
 	constructor(props) {
@@ -28,9 +29,11 @@ class Login extends React.Component {
 		event.preventDefault();
 
 		const { authenticate, history } = this.props;
+		const { email, password } = this.state;
+
 		const credentials = {
-			email: this.state.email,
-			password: this.state.password
+			email,
+			password
 		};
 
 		authenticate(credentials, history);
@@ -48,7 +51,7 @@ class Login extends React.Component {
 							onChange={this.handleChange}
 						/>
 
-						<label htmlFor='email'>Имейл</label>
+						<label htmlFor='email'>{loginForm.emailLabel}</label>
 					</div>
 
 					<div className='form__row'>
@@ -59,12 +62,14 @@ class Login extends React.Component {
 							onChange={this.handleChange}
 						/>
 
-						<label htmlFor='password'>Парола</label>
+						<label htmlFor='password'>
+							{loginForm.passwordLabel}
+						</label>
 					</div>
 
 					<div className='form__row'>
 						<button type='submit' className='button'>
-							Влез
+							{loginForm.submitButtonLabel}
 						</button>
 					</div>
 				</form>
