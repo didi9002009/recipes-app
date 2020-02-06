@@ -1,5 +1,5 @@
 /* Light Theme styles */
-.app--theme-light {
+.theme-light {
 	background-color: $white;
 
 	/* Header */
@@ -49,17 +49,15 @@
 		background-color: $white-darker;
 		color: rgba($grey-darker, .6);
 	}
-}
 
-/* NotFound */
-.not-found--theme-light {
-	background-color: $white;
+	/* NotFound */
+	.not-found {
+		h1 {
+			color: rgba($grey-darker, .87);
+		}
 
-	h1 {
-		color: rgba($grey-darker, .87);
-	}
-
-	a {
-		color: $purple;
+		a {
+			color: $purple;
+		}
 	}
 }
