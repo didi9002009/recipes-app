@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { isLoaded, isEmpty } from 'react-redux-firebase';
 
 import { authenticate } from './actions';
-import { loginForm } from './constants';
+import { loginForm, homeUrl } from './constants';
+import { getAuth, getProfile } from '../App/selectors';
 
 class Login extends React.Component {
 	constructor(props) {
@@ -28,7 +30,7 @@ class Login extends React.Component {
 	authenticate(event) {
 		event.preventDefault();
 
-		const { authenticate, history } = this.props;
+		const { authenticate } = this.props;
 		const { email, password } = this.state;
 
 		const credentials = {
@@ -36,55 +38,69 @@ class Login extends React.Component {
 			password
 		};
 
-		authenticate(credentials, history);
+		authenticate(credentials);
 	}
 
 	render() {
-		return (
-			<div className='login'>
-				<form onSubmit={this.authenticate}>
-					<div className='form__row'>
-						<input
-							type='email'
-							name='email'
-							id='email'
-							onChange={this.handleChange}
-						/>
+		const { auth, profile } = this.props;
 
-						<label htmlFor='email'>{loginForm.emailLabel}</label>
-					</div>
+		return isLoaded(profile) ? (
+			isEmpty(auth) ? (
+				<div className='login'>
+					<form onSubmit={this.authenticate}>
+						<div className='form__row'>
+							<input
+								type='email'
+								name='email'
+								id='email'
+								onChange={this.handleChange}
+							/>
 
-					<div className='form__row'>
-						<input
-							type='password'
-							name='password'
-							id='password'
-							onChange={this.handleChange}
-						/>
+							<label htmlFor='email'>
+								{loginForm.emailLabel}
+							</label>
+						</div>
 
-						<label htmlFor='password'>
-							{loginForm.passwordLabel}
-						</label>
-					</div>
+						<div className='form__row'>
+							<input
+								type='password'
+								name='password'
+								id='password'
+								onChange={this.handleChange}
+							/>
 
-					<div className='form__row'>
-						<button type='submit' className='button'>
-							{loginForm.submitButtonLabel}
-						</button>
-					</div>
-				</form>
-			</div>
-		);
+							<label htmlFor='password'>
+								{loginForm.passwordLabel}
+							</label>
+						</div>
+
+						<div className='form__row'>
+							<button type='submit' className='button'>
+								{loginForm.submitButtonLabel}
+							</button>
+						</div>
+					</form>
+				</div>
+			) : (
+				<Redirect to={homeUrl} />
+			)
+		) : null;
 	}
 }
 
 Login.propTypes = {
 	authenticate: PropTypes.func,
-	history: PropTypes.object
+	auth: PropTypes.object,
+	profile: PropTypes.object
 };
+
+const mapStateToProps = state => ({
+	auth: getAuth(state),
+	profile: getProfile(state)
+});
 
 const mapDispatchToProps = {
 	authenticate
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(Login));
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
