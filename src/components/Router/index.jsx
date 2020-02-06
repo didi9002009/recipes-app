@@ -1,10 +1,13 @@
 import React from 'react';
+import { compose } from 'redux';
 import { useSelector } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { firestoreConnect } from 'react-redux-firebase';
 
 import Login from '../Login';
 import App from '../App';
 import NotFound from '../NotFound';
+import Details from '../Details';
 import PrivateRoute from '../PrivateRoute';
 
 const Router = () => {
@@ -16,11 +19,12 @@ const Router = () => {
 		<BrowserRouter>
 			<Switch>
 				<Route exact path='/login' component={Login} />
-				<PrivateRoute exact path='/recipes' component={App} />
+				<PrivateRoute path='/recipes' component={App} />
+				<PrivateRoute path='/recipe-:id' component={Details} />
 				<PrivateRoute path='' component={NotFound} />
 			</Switch>
 		</BrowserRouter>
 	);
 };
 
-export default Router;
+export default compose(firestoreConnect(() => ['recipes']))(Router);

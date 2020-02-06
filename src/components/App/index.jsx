@@ -1,6 +1,4 @@
 import React from 'react';
-import { compose } from 'redux';
-import { firestoreConnect } from 'react-redux-firebase';
 
 import Header from '../Header';
 import List from '../List';
@@ -14,4 +12,4 @@ const App = () => (
 	</div>
 );
 
-export default compose(firestoreConnect(() => ['recipes']))(App);
+export default App;
