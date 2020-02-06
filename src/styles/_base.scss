@@ -49,7 +49,8 @@ p {
 
 /* Containers */
 .container {
-	max-width: 100%;
+	width: 100%;
+	max-width: $container-max-width;
 	margin-left: auto;
 	margin-right: auto;
 	padding-left: $unit * 2;

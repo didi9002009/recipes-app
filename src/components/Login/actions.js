@@ -20,7 +20,6 @@ export const authenticate = credentials => {
 			})
 			.catch(() => {
 				dispatch(authError());
-				firebase.auth().signOut();
 			});
 	};
 };
