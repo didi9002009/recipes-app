@@ -5,23 +5,30 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { getAppTheme } from '../App/selectors';
+
 import { notFoundTitle, notFoundLink } from './constants';
 
-const NotFound = ({ isDarkTheme }) => (
-	<div
-		className={classNames(
-			'not-found',
-			{ 'not-found--theme-dark': isDarkTheme },
-			{ 'not-found--theme-light': !isDarkTheme }
-		)}
-	>
-		<div className='not-found__content'>
-			<h1>{notFoundTitle}</h1>
+class NotFound extends React.Component {
+	render() {
+		const { isDarkTheme } = this.props;
 
-			<Link to='/'>{notFoundLink}</Link>
-		</div>
-	</div>
-);
+		return (
+			<div
+				className={classNames(
+					'not-found',
+					{ 'not-found--theme-dark': isDarkTheme },
+					{ 'not-found--theme-light': !isDarkTheme }
+				)}
+			>
+				<div className='not-found__content'>
+					<h1>{notFoundTitle}</h1>
+
+					<Link to='/'>{notFoundLink}</Link>
+				</div>
+			</div>
+		);
+	}
+}
 
 NotFound.propTypes = {
 	isDarkTheme: PropTypes.bool
