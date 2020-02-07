@@ -7,7 +7,8 @@
 	top: 0;
 	z-index: 999;
 	border-top: $unit * 2 solid $black;
-	transition: background-color .3s, border-color .3s, box-shadow .3s;
+	box-shadow: 0 3px 5px rgba($grey-darker, .3);
+	transition: background-color .3s, border-color .3s;
 
 	&__content {
 		display: flex;

@@ -6,7 +6,6 @@
 	.header {
 		border-top-color: $grey-darker;
 		background-color: $grey-lighter;
-		box-shadow: 0 3px 5px rgba($grey-darker, 0);
 	}
 
 	/* Theme switcher */
@@ -40,6 +39,26 @@
 		&__actions {
 			span {
 				color: $purple-lighter;
+			}
+		}
+	}
+
+	/* Details */
+	.details {
+		&__bar {
+			background-color: $purple-lighter-secondary;
+		}
+
+		&__head {
+			background-color: $purple-lighter;
+		}
+
+		&__body {
+			color: $white;
+
+			p,
+			ul {
+				color: rgba($white, .87);
 			}
 		}
 	}

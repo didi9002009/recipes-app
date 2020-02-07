@@ -1,0 +1,78 @@
+/* Details component styles */
+.details {
+	&__bar {
+		height: $unit * 2;
+	}
+
+	&__head {
+		color: $white;
+		
+		&-inner {
+			padding: $unit * 3 $unit $unit * 3 $unit * 4.75;
+			position: relative;
+		}
+	}
+
+	&__back {
+		font-size: 0;
+		line-height: 1;
+		position: absolute;
+		left: $unit * -.5;
+		top: $unit * 3;
+
+		i {
+			font-size: $unit * 3.75;
+			color: $white;
+		}
+	}
+
+	&__title {
+		line-height: 1.25;
+	}
+
+	&__meta {
+		display: flex;
+		align-items: center;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		color: rgba($white, .87);
+
+		li {
+			display: flex;
+			align-items: center;
+
+			& + li {
+				margin-left: $unit * 2;
+			}
+		}
+
+		i {
+			margin-right: $unit / 2;
+			font-size: $font-size-medium;
+		}
+	}
+
+	&__body {
+		&-inner {
+			padding: $unit * 3 $unit $unit * 3 $unit * 4.75;
+		}
+
+		h3 {
+			margin: 0 0 $unit * 1.5;
+		}
+
+		ul {
+			padding: 0 0 0 $unit * 2.5;
+			margin: 0 0 $unit * 3;
+		}
+
+		p {
+			margin: 0 0 $unit * 3;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
