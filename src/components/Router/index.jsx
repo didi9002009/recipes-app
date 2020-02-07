@@ -18,7 +18,7 @@ const Router = () => {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route exact path='/login' component={Login} />
+				<Route exact path='/' component={Login} />
 				<PrivateRoute path='/recipes' component={App} />
 				<PrivateRoute path='/recipe-:id' component={Details} />
 				<PrivateRoute path='' component={NotFound} />
