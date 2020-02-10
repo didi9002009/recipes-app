@@ -2,8 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import Brightness4 from '@material-ui/icons/Brightness4';
+import Brightness7 from '@material-ui/icons/Brightness7';
+
 import { getAppTheme } from '../App/selectors';
 import { setThemeDark, setThemeLight } from '../App/actions';
+
+const styles = {
+	btn: {
+		fontSize: '1.5rem'
+	}
+};
 
 class ThemeSwitcher extends React.Component {
 	constructor(props) {
@@ -19,16 +30,20 @@ class ThemeSwitcher extends React.Component {
 	}
 
 	render() {
-		return (
-			<button className='theme-switcher' onClick={this.setTheme}>
-				<i className='material-icons material-icons--dark'>
-					brightness_7
-				</i>
+		const { classes, isDarkTheme } = this.props;
 
-				<i className='material-icons material-icons--light'>
-					brightness_4
-				</i>
-			</button>
+		return (
+			<IconButton
+				className={classes.btn}
+				onClick={this.setTheme}
+				color='inherit'
+			>
+				{isDarkTheme ? (
+					<Brightness7 fontSize='inherit' />
+				) : (
+					<Brightness4 fontSize='inherit' />
+				)}
+			</IconButton>
 		);
 	}
 }
@@ -36,7 +51,8 @@ class ThemeSwitcher extends React.Component {
 ThemeSwitcher.propTypes = {
 	isDarkTheme: PropTypes.bool,
 	setThemeDark: PropTypes.func,
-	setThemeLight: PropTypes.func
+	setThemeLight: PropTypes.func,
+	classes: PropTypes.object
 };
 
 const mapStateToProps = state => ({
@@ -48,4 +64,7 @@ const mapDispatchToProps = {
 	setThemeLight
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ThemeSwitcher);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withStyles(styles)(ThemeSwitcher));
