@@ -3,18 +3,29 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import { withStyles } from '@material-ui/core/styles';
+
 import { getRecipes } from '../App/selectors';
 
 import Card from '../Card';
 
+const styles = theme => ({
+	list: {
+		marginTop: theme.spacing(2),
+		marginBottom: theme.spacing(8)
+	}
+});
+
 class List extends React.Component {
 	render() {
-		const { recipes } = this.props;
+		const { recipes, classes } = this.props;
 
 		return recipes ? (
-			<div className='list'>
-				<div className='container'>
-					<TransitionGroup className='list__content'>
+			<Box className={classes.list}>
+				<Container>
+					<TransitionGroup>
 						{recipes.map(recipe => (
 							<CSSTransition
 								key={recipe.id}
@@ -25,8 +36,8 @@ class List extends React.Component {
 							</CSSTransition>
 						))}
 					</TransitionGroup>
-				</div>
-			</div>
+				</Container>
+			</Box>
 		) : null;
 	}
 }
@@ -40,11 +51,12 @@ List.propTypes = {
 			ingredients: PropTypes.string,
 			instructions: PropTypes.string
 		})
-	)
+	),
+	classes: PropTypes.object
 };
 
 const mapStateToProps = state => ({
 	recipes: getRecipes(state)
 });
 
-export default connect(mapStateToProps)(List);
+export default connect(mapStateToProps)(withStyles(styles)(List));
