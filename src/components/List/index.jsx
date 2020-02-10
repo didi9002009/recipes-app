@@ -13,6 +13,7 @@ import Card from '../Card';
 
 const styles = theme => ({
 	list: {
+		flex: '1 1 auto',
 		marginTop: theme.spacing(2),
 		marginBottom: theme.spacing(8)
 	}

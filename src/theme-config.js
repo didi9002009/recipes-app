@@ -2,6 +2,11 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { purple, indigo } from '@material-ui/core/colors';
 
 const baseOptions = {
+	mixins: {
+		toolbar: {
+			minHeight: 64
+		}
+	},
 	typography: {
 		fontSize: 16,
 		h1: {
