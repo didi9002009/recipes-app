@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
 import { getRecipes } from '../App/selectors';
 
-import Card from '../Card';
+import SimpleCard from '../Card';
 
 const styles = theme => ({
 	list: {
@@ -26,17 +26,20 @@ class List extends React.Component {
 		return recipes ? (
 			<Box className={classes.list}>
 				<Container>
-					<TransitionGroup>
+					<Grid container spacing={2}>
 						{recipes.map(recipe => (
-							<CSSTransition
+							<Grid
 								key={recipe.id}
-								timeout={300}
-								classNames='card'
+								item
+								xs={12}
+								sm={6}
+								md={4}
+								lg={3}
 							>
-								<Card key={recipe.id} {...recipe} />
-							</CSSTransition>
+								<SimpleCard key={recipe.id} {...recipe} />
+							</Grid>
 						))}
-					</TransitionGroup>
+					</Grid>
 				</Container>
 			</Box>
 		) : null;

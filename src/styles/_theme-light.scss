@@ -1,48 +1,5 @@
 /* Light Theme styles */
 .theme-light {
-	background-color: $white;
-
-	/* Header */
-	.header {
-		border-top-color: $purple-darker;
-		background-color: $purple;
-	}
-
-	/* Theme switcher */
-	.theme-switcher {
-		.material-icons--dark {
-			opacity: 0;
-		}
-	}
-
-	/* Card */
-	.card {
-		background-color: $white;
-		box-shadow: inset 0 0 0 1px rgba($grey-darker, .1), 0 2px 3px rgba($grey-darker, .2);
-		
-		&__title {
-			color: rgba($grey-darker, .87);
-		}
-
-		&__meta {
-			li {
-				i {
-					color: $purple;
-				}
-
-				span {
-					color: rgba($grey-darker, .6);
-				}
-			}
-		}
-
-		&__actions {
-			span {
-				color: $purple;
-			}
-		}
-	}
-
 	/* Details */
 	.details {
 		&__bar {
@@ -62,12 +19,6 @@
 				color: rgba($grey-darker, .87);
 			}
 		}
-	}
-
-	/* Footer */
-	.footer {
-		background-color: $white-darker;
-		color: rgba($grey-darker, .6);
 	}
 
 	/* NotFound */

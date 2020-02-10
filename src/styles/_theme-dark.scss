@@ -1,48 +1,5 @@
 /* Dark Theme styles */
 .theme-dark {
-	background-color: $grey;
-
-	/* Header */
-	.header {
-		border-top-color: $grey-darker;
-		background-color: $grey-lighter;
-	}
-
-	/* Theme switcher */
-	.theme-switcher {
-		.material-icons--light {
-			opacity: 0;
-		}
-	}
-
-	/* Card */
-	.card {
-		background-color: $grey-lighter;
-		box-shadow: inset 0 0 0 1px rgba($grey-darker, 0), 0 2px 3px rgba($grey-darker, 0);
-
-		&__title {
-			color: rgba($white, .87);
-		}
-
-		&__meta {
-			li {
-				i {
-					color: $purple-lighter;
-				}
-
-				span {
-					color: rgba($white, .6);
-				}
-			}
-		}
-
-		&__actions {
-			span {
-				color: $purple-lighter;
-			}
-		}
-	}
-
 	/* Details */
 	.details {
 		&__bar {
@@ -61,12 +18,6 @@
 				color: rgba($white, .87);
 			}
 		}
-	}
-
-	/* Footer */
-	.footer {
-		background-color: $grey-lighter;
-		color: rgba($white, .6);
 	}
 
 	/* NotFound */

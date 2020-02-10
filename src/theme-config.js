@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { purple, indigo } from '@material-ui/core/colors';
+import { purple, indigo, grey } from '@material-ui/core/colors';
 
 const baseOptions = {
 	mixins: {
@@ -36,6 +36,9 @@ export const darkTheme = createMuiTheme({
 		type: 'dark',
 		primary: {
 			main: purple[300]
+		},
+		background: {
+			default: '#373737'
 		}
 	}
 });
@@ -46,6 +49,9 @@ export const lightTheme = createMuiTheme({
 		type: 'light',
 		primary: {
 			main: indigo['A400']
+		},
+		background: {
+			default: grey[100]
 		}
 	}
 });

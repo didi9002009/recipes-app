@@ -3,7 +3,9 @@ import { compose } from 'redux';
 import { useSelector } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { firestoreConnect } from 'react-redux-firebase';
+
 import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Login from '../Login';
 import App from '../App';
@@ -20,6 +22,7 @@ const Router = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
+			<CssBaseline />
 			<BrowserRouter>
 				<Switch>
 					<Route exact path='/' component={Login} />

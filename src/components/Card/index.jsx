@@ -1,48 +1,99 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-class Card extends React.Component {
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import IconTimer from '@material-ui/icons/Timer';
+import IconRestaurant from '@material-ui/icons/Restaurant';
+
+const styles = theme => ({
+	card: {
+		display: 'flex',
+		flexFlow: 'column',
+		height: '100%'
+	},
+	content: {
+		flex: '1 1 auto',
+		padding: theme.spacing(3),
+		paddingBottom: 0
+	},
+	span: {
+		opacity: '0.87',
+		marginLeft: theme.spacing(0.5)
+	},
+	title: {
+		marginBottom: theme.spacing(2)
+	},
+	actions: {
+		justifyContent: 'flex-end',
+		padding: theme.spacing(2)
+	}
+});
+
+class SimpleCard extends React.Component {
 	render() {
-		const { id, title, timeToCook, portions } = this.props;
+		const { id, title, timeToCook, portions, classes } = this.props;
 
 		return (
-			<div className='card'>
-				<Link to={`/recipe-${id}`}>
-					<div className='card__content'>
-						<h2 className='card__title'>{title}</h2>
+			<Card className={classes.card}>
+				<CardContent className={classes.content}>
+					<Typography variant='h2' className={classes.title}>
+						{title}
+					</Typography>
 
-						<ul className='card__meta'>
-							<li>
-								<i className='material-icons'>timer</i>
+					<Box display='flex' flexDirection='row' alignItems='center'>
+						<Box display='flex' alignItems='center'>
+							<IconTimer color='primary' fontSize='small' />
 
-								<span>{timeToCook} мин.</span>
-							</li>
+							<Typography
+								component='span'
+								className={classes.span}
+							>
+								{timeToCook} мин.
+							</Typography>
+						</Box>
 
-							<li>
-								<i className='material-icons'>restaurant</i>
+						<Box display='flex' alignItems='center' ml={2}>
+							<IconRestaurant color='primary' fontSize='small' />
 
-								<span>{portions} порции</span>
-							</li>
-						</ul>
+							<Typography
+								component='span'
+								className={classes.span}
+							>
+								{portions} порции
+							</Typography>
+						</Box>
+					</Box>
+				</CardContent>
 
-						<div className='card__actions'>
-							<span>Виж още</span>
-						</div>
-					</div>
-				</Link>
-			</div>
+				<CardActions className={classes.actions}>
+					<Button
+						color='primary'
+						component={Link}
+						to={`/recipe-${id}`}
+					>
+						Виж още
+					</Button>
+				</CardActions>
+			</Card>
 		);
 	}
 }
 
-Card.propTypes = {
+SimpleCard.propTypes = {
 	id: PropTypes.string,
 	title: PropTypes.string,
 	timeToCook: PropTypes.number,
 	portions: PropTypes.number,
 	ingredients: PropTypes.string,
-	instructions: PropTypes.string
+	instructions: PropTypes.string,
+	classes: PropTypes.object
 };
 
-export default Card;
+export default withStyles(styles)(SimpleCard);
