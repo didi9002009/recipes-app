@@ -33,13 +33,6 @@ const Footer = () => {
 				</Typography>
 			</Container>
 		</Paper>
-		// <footer className='footer'>
-		// 	<div className='container'>
-		// 		<div className='footer__content'>
-		// 			<p className='copyright'>{footerCopyright}</p>
-		// 		</div>
-		// 	</div>
-		// </footer>
 	);
 };
 
