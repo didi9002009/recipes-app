@@ -10,11 +10,12 @@ import Brightness7 from '@material-ui/icons/Brightness7';
 import { getAppTheme } from '../App/selectors';
 import { setThemeDark, setThemeLight } from '../App/actions';
 
-const styles = {
+const styles = theme => ({
 	btn: {
-		fontSize: '1.5rem'
+		fontSize: '1.5rem',
+		padding: theme.spacing(1)
 	}
-};
+});
 
 class ThemeSwitcher extends React.Component {
 	constructor(props) {
@@ -37,7 +38,6 @@ class ThemeSwitcher extends React.Component {
 				className={classes.btn}
 				onClick={this.setTheme}
 				color='inherit'
-				size='small'
 			>
 				{isDarkTheme ? (
 					<Brightness7 fontSize='inherit' />

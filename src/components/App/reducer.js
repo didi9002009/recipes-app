@@ -1,9 +1,11 @@
 import { SET_THEME_DARK, SET_THEME_LIGHT } from './constants';
 import { CHANGE_LOGIN_STATUS } from '../Login/constants';
+import { OPEN_SEARCH, CLOSE_SEARCH } from '../Search/constants';
 
 const initialState = {
 	isDarkTheme: true,
-	loginFailed: false
+	loginFailed: false,
+	isSearchOpened: false
 };
 
 const appReducer = (state = initialState, action) => {
@@ -11,6 +13,8 @@ const appReducer = (state = initialState, action) => {
 		case SET_THEME_DARK:
 		case SET_THEME_LIGHT:
 		case CHANGE_LOGIN_STATUS:
+		case OPEN_SEARCH:
+		case CLOSE_SEARCH:
 			return {
 				...state,
 				...action.payload

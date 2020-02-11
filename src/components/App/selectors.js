@@ -9,6 +9,10 @@ export const getLoginStatus = createSelector(
 	getApp,
 	({ loginFailed }) => loginFailed
 );
+export const getSearchOpenedState = createSelector(
+	getApp,
+	({ isSearchOpened }) => isSearchOpened
+);
 
 export const getFirestore = ({ firestore }) => firestore;
 export const getOrdered = createSelector(

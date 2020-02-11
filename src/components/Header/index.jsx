@@ -6,13 +6,17 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
-import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { headerTitle } from './constants';
-import ThemeSwitcher from '../ThemeSwitcher';
 import { logOut } from './actions';
+import ThemeSwitcher from '../ThemeSwitcher';
+import Search from '../Search';
+
+import { openSearch, closeSearch } from '../Search/actions';
 
 const useStyles = makeStyles(theme => ({
 	bar: {
@@ -22,10 +26,13 @@ const useStyles = makeStyles(theme => ({
 	},
 	title: {
 		flexGrow: 1
+	},
+	icon: {
+		padding: theme.spacing(1)
 	}
 }));
 
-const Header = ({ logOut }) => {
+const Header = ({ logOut, openSearch }) => {
 	const classes = useStyles();
 
 	return (
@@ -36,11 +43,25 @@ const Header = ({ logOut }) => {
 				</Typography>
 
 				<Box display='flex' alignItems='center'>
-					<IconButton size='small' color='inherit' onClick={logOut}>
-						<PowerSettingsNewIcon />
+					<IconButton
+						color='inherit'
+						className={classes.icon}
+						onClick={openSearch}
+					>
+						<SearchIcon />
 					</IconButton>
 
+					<Search />
+
 					<ThemeSwitcher />
+
+					<IconButton
+						color='inherit'
+						onClick={logOut}
+						className={classes.icon}
+					>
+						<ExitToAppIcon />
+					</IconButton>
 				</Box>
 			</Toolbar>
 		</AppBar>
@@ -48,11 +69,14 @@ const Header = ({ logOut }) => {
 };
 
 Header.propTypes = {
-	logOut: PropTypes.func
+	logOut: PropTypes.func,
+	openSearch: PropTypes.func
 };
 
 const mapDispatchToProps = {
-	logOut
+	logOut,
+	openSearch,
+	closeSearch
 };
 
 export default connect(null, mapDispatchToProps)(Header);
