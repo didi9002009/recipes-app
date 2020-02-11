@@ -16,7 +16,7 @@ import { logOut } from './actions';
 import ThemeSwitcher from '../ThemeSwitcher';
 import Search from '../Search';
 
-import { openSearch, closeSearch } from '../Search/actions';
+import { openSearch } from '../Search/actions';
 
 const useStyles = makeStyles(theme => ({
 	bar: {
@@ -75,8 +75,7 @@ Header.propTypes = {
 
 const mapDispatchToProps = {
 	logOut,
-	openSearch,
-	closeSearch
+	openSearch
 };
 
 export default connect(null, mapDispatchToProps)(Header);
