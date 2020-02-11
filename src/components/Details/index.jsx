@@ -3,6 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import IconTimer from '@material-ui/icons/Timer';
+import IconRestaurant from '@material-ui/icons/Restaurant';
+import IconArrowBack from '@material-ui/icons/ArrowBack';
+import { withStyles } from '@material-ui/core/styles';
+
 import { getRecipes } from '../App/selectors';
 import { appHomeUrl } from '../App/constants';
 import {
@@ -12,66 +22,141 @@ import {
 	instructionsTitle
 } from './constants';
 
+const styles = theme => ({
+	head: {
+		backgroundColor: theme.palette.primary.main,
+		borderTopWidth: theme.spacing(2),
+		borderTopStyle: 'solid',
+		borderTopColor: theme.palette.primary.dark,
+		position: 'relative',
+		color: '#fff'
+	},
+	back: {
+		position: 'absolute',
+		left: theme.spacing(0.5),
+		top: theme.spacing(1.5),
+		color: 'inherit'
+	},
+	title: {
+		marginBottom: theme.spacing(2)
+	},
+	iconList: {
+		opacity: '0.87'
+	},
+	iconListSpan: {
+		marginLeft: theme.spacing(0.5)
+	},
+	subtitle: {
+		marginBottom: theme.spacing(1.5)
+	},
+	list: {
+		padding: 0,
+		paddingLeft: theme.spacing(2.5),
+		marginBottom: theme.spacing(3),
+		lineHeight: 1.4,
+		listStyle: 'disc',
+		opacity: '0.87'
+	},
+	listItem: {
+		padding: 0
+	},
+	paragraph: {
+		opacity: '0.87'
+	}
+});
+
 class Details extends React.Component {
 	render() {
-		const { match, recipes } = this.props;
+		const { match, recipes, classes } = this.props;
 		const recipe =
 			recipes && recipes.find(recipe => recipe.id === match.params.id);
 
 		return (
-			<div className='details'>
-				<div className='details__bar'></div>
+			<React.Fragment>
+				<Paper square={true} elevation={5} className={classes.head}>
+					<Container>
+						<Box pt={3} pr={1} pb={3} pl={5}>
+							<IconButton
+								component={Link}
+								to={appHomeUrl}
+								className={classes.back}
+							>
+								<IconArrowBack />
+							</IconButton>
 
-				<div className='details__head'>
-					<div className='container'>
-						<div className='details__head-inner'>
-							<Link to={appHomeUrl} className='details__back'>
-								<i className='material-icons'>arrow_back</i>
-							</Link>
+							<Typography variant='h1' className={classes.title}>
+								{recipe.title}
+							</Typography>
 
-							<h1 className='details__title'>{recipe.title}</h1>
+							<Box
+								display='flex'
+								flexDirection='row'
+								alignItems='center'
+								className={classes.iconList}
+							>
+								<Box display='flex' alignItems='center'>
+									<IconTimer fontSize='small' />
 
-							<ul className='details__meta'>
-								<li>
-									<i className='material-icons'>timer</i>
-
-									<span>
+									<Typography
+										component='span'
+										className={classes.iconListSpan}
+									>
 										{recipe.timeToCook} {timeToCookText}
-									</span>
-								</li>
+									</Typography>
+								</Box>
 
-								<li>
-									<i className='material-icons'>restaurant</i>
+								<Box display='flex' alignItems='center' ml={2}>
+									<IconRestaurant fontSize='small' />
 
-									<span>
+									<Typography
+										component='span'
+										className={classes.iconListSpan}
+									>
 										{recipe.portions} {portionsText}
-									</span>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+									</Typography>
+								</Box>
+							</Box>
+						</Box>
+					</Container>
+				</Paper>
 
-				<div className='details__body'>
-					<div className='container'>
-						<div className='details__body-inner'>
-							<h3>{ingredientsTitle}</h3>
+				<Box pt={3} pr={1} pb={3} pl={5}>
+					<Container>
+						<Box>
+							<Typography
+								variant='h3'
+								className={classes.subtitle}
+							>
+								{ingredientsTitle}
+							</Typography>
 
-							<ul>
+							<ul className={classes.list}>
 								{recipe.ingredients
 									.split(',')
 									.map(ingredient => (
-										<li key={ingredient}>{ingredient}</li>
+										<li
+											key={ingredient}
+											className={classes.listItem}
+										>
+											{ingredient}
+										</li>
 									))}
 							</ul>
 
-							<h3>{instructionsTitle}</h3>
+							<Typography
+								variant='h3'
+								className={classes.subtitle}
+							>
+								{instructionsTitle}
+							</Typography>
 
-							<p>{recipe.instructions}</p>
-						</div>
-					</div>
-				</div>
-			</div>
+							<Typography className={classes.paragraph}>
+								{recipe.instructions}
+							</Typography>
+						</Box>
+					</Container>
+				</Box>
+			</React.Fragment>
 		);
 	}
 }
@@ -91,11 +176,12 @@ Details.propTypes = {
 			ingredients: PropTypes.string,
 			instructions: PropTypes.string
 		})
-	)
+	),
+	classes: PropTypes.object
 };
 
 const mapStateToProps = state => ({
 	recipes: getRecipes(state)
 });
 
-export default connect(mapStateToProps)(Details);
+export default connect(mapStateToProps)(withStyles(styles)(Details));

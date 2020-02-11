@@ -6,10 +6,3 @@
 
 /* Base Styles */
 @import './base';
-
-/* Components */
-@import '../components/Details/styles';
-
-/* Themes -- remove them once Themes are handled through the objects from theme-config.js */
-@import './theme-dark';
-@import './theme-light';
