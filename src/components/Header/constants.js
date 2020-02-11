@@ -1,1 +1,1 @@
-export const headerTitle = 'Моите рецепти';
+export const headerTitle = 'Рецепти';

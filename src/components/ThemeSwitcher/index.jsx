@@ -37,6 +37,7 @@ class ThemeSwitcher extends React.Component {
 				className={classes.btn}
 				onClick={this.setTheme}
 				color='inherit'
+				size='small'
 			>
 				{isDarkTheme ? (
 					<Brightness7 fontSize='inherit' />
