@@ -17,7 +17,6 @@ import { darkTheme, lightTheme } from '../../theme-config';
 const Router = () => {
 	// Handle App Theme change
 	const isDarkTheme = useSelector(state => state.app.isDarkTheme);
-	document.body.className = isDarkTheme ? 'theme-dark' : 'theme-light';
 	const theme = isDarkTheme ? darkTheme : lightTheme;
 
 	return (

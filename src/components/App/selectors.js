@@ -5,6 +5,10 @@ export const getAppTheme = createSelector(
 	getApp,
 	({ isDarkTheme }) => isDarkTheme
 );
+export const getLoginStatus = createSelector(
+	getApp,
+	({ loginFailed }) => loginFailed
+);
 
 export const getFirestore = ({ firestore }) => firestore;
 export const getOrdered = createSelector(
