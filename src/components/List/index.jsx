@@ -1,13 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-
-import { getRecipes } from '../App/selectors';
 
 import SimpleCard from '../Card';
 
@@ -59,8 +56,4 @@ List.propTypes = {
 	classes: PropTypes.object
 };
 
-const mapStateToProps = state => ({
-	recipes: getRecipes(state)
-});
-
-export default connect(mapStateToProps)(withStyles(styles)(List));
+export default withStyles(styles)(List);
