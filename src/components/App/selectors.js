@@ -13,6 +13,10 @@ export const getSearchOpenedState = createSelector(
 	getApp,
 	({ isSearchOpened }) => isSearchOpened
 );
+export const getRecipesLimit = createSelector(
+	getApp,
+	({ recipesLimit }) => recipesLimit
+);
 
 export const getFirestore = ({ firestore }) => firestore;
 export const getOrdered = createSelector(
