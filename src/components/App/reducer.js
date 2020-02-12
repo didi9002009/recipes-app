@@ -1,13 +1,18 @@
 import { SET_THEME_DARK, SET_THEME_LIGHT } from './constants';
 import { CHANGE_LOGIN_STATUS } from '../Login/constants';
-import { OPEN_SEARCH, CLOSE_SEARCH } from '../Search/constants';
+import {
+	OPEN_SEARCH,
+	CLOSE_SEARCH,
+	SET_FILTERED_RECIPES
+} from '../Search/constants';
 import { UPDATE_RECIPES_LIMIT, limitNumber } from '../List/constants';
 
 const initialState = {
 	isDarkTheme: true,
 	loginFailed: false,
 	isSearchOpened: false,
-	recipesLimit: limitNumber
+	recipesLimit: limitNumber,
+	filteredRecipes: []
 };
 
 const appReducer = (state = initialState, action) => {
@@ -18,6 +23,7 @@ const appReducer = (state = initialState, action) => {
 		case OPEN_SEARCH:
 		case CLOSE_SEARCH:
 		case UPDATE_RECIPES_LIMIT:
+		case SET_FILTERED_RECIPES:
 			return {
 				...state,
 				...action.payload

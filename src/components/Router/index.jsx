@@ -11,7 +11,9 @@ import Login from '../Login';
 import App from '../App';
 import NotFound from '../NotFound';
 import Details from '../Details';
+import SearchResults from '../SearchResults';
 import PrivateRoute from '../PrivateRoute';
+
 import { darkTheme, lightTheme } from '../../theme-config';
 
 const Router = () => {
@@ -27,6 +29,10 @@ const Router = () => {
 					<Route exact path='/' component={Login} />
 					<PrivateRoute path='/recipes' component={App} />
 					<PrivateRoute path='/recipe-:id' component={Details} />
+					<PrivateRoute
+						path='/search-results'
+						component={SearchResults}
+					/>
 					<PrivateRoute path='' component={NotFound} />
 				</Switch>
 			</BrowserRouter>

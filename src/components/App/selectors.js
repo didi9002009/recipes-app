@@ -17,6 +17,10 @@ export const getRecipesLimit = createSelector(
 	getApp,
 	({ recipesLimit }) => recipesLimit
 );
+export const getFilteredRecipes = createSelector(
+	getApp,
+	({ filteredRecipes }) => filteredRecipes
+);
 
 export const getFirestore = ({ firestore }) => firestore;
 export const getOrdered = createSelector(
