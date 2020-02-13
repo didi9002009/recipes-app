@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -14,7 +13,6 @@ import IconArrowBack from '@material-ui/icons/ArrowBack';
 import { withStyles } from '@material-ui/core/styles';
 
 import { getRecipes } from '../App/selectors';
-import { appHomeUrl } from '../App/constants';
 import {
 	timeToCookText,
 	portionsText,
@@ -66,6 +64,18 @@ const styles = theme => ({
 });
 
 class Details extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.goBack = this.goBack.bind(this);
+	}
+
+	goBack() {
+		const { history } = this.props;
+
+		history.goBack();
+	}
+
 	render() {
 		const { match, recipes, classes } = this.props;
 		const recipe =
@@ -77,9 +87,8 @@ class Details extends React.Component {
 					<Container>
 						<Box pt={3} pr={1} pb={3} pl={5}>
 							<IconButton
-								component={Link}
-								to={appHomeUrl}
 								className={classes.back}
+								onClick={this.goBack}
 							>
 								<IconArrowBack />
 							</IconButton>
@@ -177,7 +186,8 @@ Details.propTypes = {
 			instructions: PropTypes.string
 		})
 	),
-	classes: PropTypes.object
+	classes: PropTypes.object,
+	history: PropTypes.object
 };
 
 const mapStateToProps = state => ({
