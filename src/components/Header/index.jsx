@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -17,6 +18,7 @@ import ThemeSwitcher from '../ThemeSwitcher';
 import Search from '../Search';
 
 import { openSearch } from '../Search/actions';
+import { appHomeUrl } from '../App/constants';
 
 const useStyles = makeStyles(theme => ({
 	bar: {
@@ -26,6 +28,10 @@ const useStyles = makeStyles(theme => ({
 	},
 	title: {
 		flexGrow: 1
+	},
+	link: {
+		color: 'inherit',
+		textDecoration: 'none'
 	},
 	icon: {
 		padding: theme.spacing(1)
@@ -39,7 +45,9 @@ const Header = ({ logOut, openSearch }) => {
 		<AppBar position='fixed' className={classes.bar}>
 			<Toolbar>
 				<Typography variant='h1' className={classes.title}>
-					{headerTitle}
+					<Link to={appHomeUrl} className={classes.link}>
+						{headerTitle}
+					</Link>
 				</Typography>
 
 				<Box display='flex' alignItems='center'>
