@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import firebase from 'firebase/app';
 import { firestoreConnect } from 'react-redux-firebase';
 
 import Box from '@material-ui/core/Box';
@@ -77,7 +78,10 @@ class AddForm extends React.Component {
 		const { firestore, handleClose } = this.props;
 
 		// Add recipe to database
-		firestore.add('recipes', formData);
+		firestore.add('recipes', {
+			...formData,
+			timestamp: firebase.firestore.FieldValue.serverTimestamp()
+		});
 
 		// Reset form state
 		this.setState({

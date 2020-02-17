@@ -40,4 +40,11 @@ const Router = () => {
 	);
 };
 
-export default compose(firestoreConnect(() => ['recipes']))(Router);
+export default compose(
+	firestoreConnect(() => [
+		{
+			collection: 'recipes',
+			orderBy: ['timestamp', 'desc']
+		}
+	])
+)(Router);
