@@ -142,12 +142,12 @@ class Details extends React.Component {
 							<ul className={classes.list}>
 								{recipe.ingredients
 									.split(',')
-									.map(ingredient => (
+									.map((ingredient, index) => (
 										<li
-											key={ingredient}
+											key={`${ingredient.trim()}-${index}`}
 											className={classes.listItem}
 										>
-											{ingredient}
+											{ingredient.trim()}
 										</li>
 									))}
 							</ul>
@@ -180,8 +180,8 @@ Details.propTypes = {
 		PropTypes.shape({
 			id: PropTypes.string,
 			title: PropTypes.string,
-			timeToCook: PropTypes.number,
-			portions: PropTypes.number,
+			timeToCook: PropTypes.string,
+			portions: PropTypes.string,
 			ingredients: PropTypes.string,
 			instructions: PropTypes.string
 		})
