@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Header from '../Header';
 import List from '../List';
+import AddRecipe from '../AddRecipe';
 import Footer from '../Footer';
 
 import { getRecipes } from './selectors';
@@ -29,6 +30,7 @@ const App = ({ recipes }) => {
 			<Header />
 			<List recipes={recipes} />
 			<Footer />
+			<AddRecipe />
 		</Box>
 	);
 };
@@ -37,8 +39,8 @@ App.propTypes = {
 	recipes: PropTypes.arrayOf(
 		PropTypes.shape({
 			title: PropTypes.string,
-			timeToCook: PropTypes.number,
-			portions: PropTypes.number,
+			timeToCook: PropTypes.string,
+			portions: PropTypes.string,
 			ingredients: PropTypes.string,
 			instructions: PropTypes.string
 		})

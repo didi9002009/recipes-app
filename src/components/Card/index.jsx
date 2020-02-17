@@ -89,8 +89,8 @@ class SimpleCard extends React.Component {
 SimpleCard.propTypes = {
 	id: PropTypes.string,
 	title: PropTypes.string,
-	timeToCook: PropTypes.number,
-	portions: PropTypes.number,
+	timeToCook: PropTypes.string,
+	portions: PropTypes.string,
 	ingredients: PropTypes.string,
 	instructions: PropTypes.string,
 	classes: PropTypes.object

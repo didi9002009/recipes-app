@@ -75,8 +75,8 @@ List.propTypes = {
 	recipes: PropTypes.arrayOf(
 		PropTypes.shape({
 			title: PropTypes.string,
-			timeToCook: PropTypes.number,
-			portions: PropTypes.number,
+			timeToCook: PropTypes.string,
+			portions: PropTypes.string,
 			ingredients: PropTypes.string,
 			instructions: PropTypes.string
 		})
