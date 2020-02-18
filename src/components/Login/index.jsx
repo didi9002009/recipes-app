@@ -76,6 +76,10 @@ class Login extends React.Component {
 			helperText: loginFailed ? loginForm.еrrorText : null
 		};
 
+		if (isEmpty(profile)) {
+			return null;
+		}
+
 		return isLoaded(profile) ? (
 			isEmpty(auth) ? (
 				<Box className={classes.root}>
