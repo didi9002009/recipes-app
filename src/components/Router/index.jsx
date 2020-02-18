@@ -1,8 +1,6 @@
 import React from 'react';
-import { compose } from 'redux';
 import { useSelector } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { firestoreConnect } from 'react-redux-firebase';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -40,11 +38,4 @@ const Router = () => {
 	);
 };
 
-export default compose(
-	firestoreConnect(() => [
-		{
-			collection: 'recipes',
-			orderBy: ['timestamp', 'desc']
-		}
-	])
-)(Router);
+export default Router;

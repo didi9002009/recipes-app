@@ -1,8 +1,10 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
+import { firestoreConnect } from 'react-redux-firebase';
 
 import { getAuth, getProfile } from '../App/selectors';
 import { appLoginUrl } from '../App/constants';
@@ -39,4 +41,11 @@ const mapStateToProps = state => ({
 	profile: getProfile(state)
 });
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default compose(
+	firestoreConnect(() => [
+		{
+			collection: 'recipes',
+			orderBy: ['timestamp', 'desc']
+		}
+	])
+)(connect(mapStateToProps)(PrivateRoute));
