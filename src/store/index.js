@@ -7,11 +7,9 @@ import 'firebase/firestore';
 import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer, createFirestoreInstance } from 'redux-firestore';
 
-import { fbConfig } from '../config';
-
 import appReducers from '../components/App/reducer';
 
-firebase.initializeApp(fbConfig);
+firebase.initializeApp(process.env.REACT_APP_FIREBASE_CONF);
 firebase.firestore();
 
 const rootReducer = combineReducers({
