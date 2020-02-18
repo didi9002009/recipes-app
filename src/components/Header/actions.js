@@ -5,7 +5,8 @@ import { limitNumber } from '../List/constants';
 
 export const logOut = () => {
 	return dispatch => {
-		firebase.auth().signOut();
 		dispatch(updateRecipesLimit(limitNumber));
+		firebase.auth().signOut();
+		firebase.logout();
 	};
 };
