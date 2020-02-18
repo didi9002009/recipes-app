@@ -41,7 +41,7 @@ const store = createStore(
 );
 
 const rrfConfig = {
-	userProfile: null,
+	userProfile: 'users',
 	useFirestoreForProfile: true
 };
 
