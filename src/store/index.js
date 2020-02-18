@@ -9,6 +9,7 @@ import { firestoreReducer, createFirestoreInstance } from 'redux-firestore';
 
 import appReducers from '../components/App/reducer';
 
+/* eslint-disable-next-line no-undef */
 firebase.initializeApp(process.env.REACT_APP_FIREBASE_CONF);
 firebase.firestore();
 
