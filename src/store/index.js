@@ -7,7 +7,7 @@ import 'firebase/firestore';
 import { firebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer, createFirestoreInstance } from 'redux-firestore';
 
-import { fbConfig, rrfConfig } from '../config';
+import { fbConfig } from '../config';
 
 import appReducers from '../components/App/reducer';
 
@@ -29,6 +29,11 @@ const store = createStore(
 	rootReducer,
 	composeEnchancers(applyMiddleware(thunk))
 );
+
+const rrfConfig = {
+	userProfile: 'users',
+	useFirestoreForProfile: true
+};
 
 export const rrfProps = {
 	firebase,
