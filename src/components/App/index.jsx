@@ -10,7 +10,7 @@ import List from '../List';
 import AddRecipe from '../AddRecipe';
 import Footer from '../Footer';
 
-import { getRecipes } from './selectors';
+import { getRecipes, getProfile } from './selectors';
 
 const useStyles = makeStyles(theme => ({
 	app: {
@@ -22,15 +22,16 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const App = ({ recipes }) => {
+const App = ({ recipes, profile }) => {
 	const classes = useStyles();
+	const isAdmin = profile.role === 'admin';
 
 	return (
 		<Box className={classes.app}>
 			<Header />
 			<List recipes={recipes} />
 			<Footer />
-			<AddRecipe />
+			{isAdmin && <AddRecipe />}
 		</Box>
 	);
 };
@@ -44,11 +45,13 @@ App.propTypes = {
 			ingredients: PropTypes.string,
 			instructions: PropTypes.string
 		})
-	)
+	),
+	profile: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-	recipes: getRecipes(state)
+	recipes: getRecipes(state),
+	profile: getProfile(state)
 });
 
 export default connect(mapStateToProps)(App);
