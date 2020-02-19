@@ -50,7 +50,7 @@ const styles = theme => ({
 	}
 });
 
-class AddForm extends React.Component {
+class AddEditForm extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -172,10 +172,10 @@ class AddForm extends React.Component {
 	}
 }
 
-AddForm.propTypes = {
+AddEditForm.propTypes = {
 	classes: PropTypes.object,
 	handleClose: PropTypes.func,
 	firestore: PropTypes.object
 };
 
-export default firestoreConnect()(withStyles(styles)(AddForm));
+export default firestoreConnect()(withStyles(styles)(AddEditForm));

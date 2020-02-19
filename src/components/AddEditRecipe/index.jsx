@@ -7,7 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Drawer from '@material-ui/core/Drawer';
 import { withStyles } from '@material-ui/core/styles';
 
-import AddForm from '../AddForm';
+import AddEditForm from '../AddEditForm';
 
 const styles = theme => ({
 	fab: {
@@ -21,7 +21,7 @@ const styles = theme => ({
 	}
 });
 
-class AddRecipe extends React.Component {
+class AddEditRecipe extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -66,7 +66,7 @@ class AddRecipe extends React.Component {
 					className={classes.sidebar}
 				>
 					<Box className={classes.form}>
-						<AddForm handleClose={this.handleClose} />
+						<AddEditForm handleClose={this.handleClose} />
 					</Box>
 				</Drawer>
 			</React.Fragment>
@@ -74,8 +74,8 @@ class AddRecipe extends React.Component {
 	}
 }
 
-AddRecipe.propTypes = {
+AddEditRecipe.propTypes = {
 	classes: PropTypes.object
 };
 
-export default withStyles(styles)(AddRecipe);
+export default withStyles(styles)(AddEditRecipe);
