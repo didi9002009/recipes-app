@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -11,6 +12,16 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import IconTimer from '@material-ui/icons/Timer';
 import IconRestaurant from '@material-ui/icons/Restaurant';
+
+import {
+	timeToCookText,
+	portionsText,
+	buttonViewText,
+	buttonEditText
+} from './constants';
+import { setCurrentlyEditingId } from './actions';
+import { openForm, updateFormType } from '../AddEditRecipe/actions';
+import { getProfile } from '../App/selectors';
 
 const styles = theme => ({
 	card: {
@@ -37,8 +48,36 @@ const styles = theme => ({
 });
 
 class SimpleCard extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick() {
+		const {
+			id,
+			openForm,
+			updateFormType,
+			setCurrentlyEditingId
+		} = this.props;
+
+		setCurrentlyEditingId(id);
+		updateFormType('edit');
+		openForm();
+	}
+
 	render() {
-		const { id, title, timeToCook, portions, classes } = this.props;
+		const {
+			id,
+			title,
+			timeToCook,
+			portions,
+			classes,
+			profile
+		} = this.props;
+
+		const isAdmin = profile.role === 'admin';
 
 		return (
 			<Card className={classes.card}>
@@ -55,7 +94,7 @@ class SimpleCard extends React.Component {
 								component='span'
 								className={classes.span}
 							>
-								{timeToCook} мин.
+								{timeToCook} {timeToCookText}
 							</Typography>
 						</Box>
 
@@ -66,19 +105,25 @@ class SimpleCard extends React.Component {
 								component='span'
 								className={classes.span}
 							>
-								{portions} порции
+								{portions} {portionsText}
 							</Typography>
 						</Box>
 					</Box>
 				</CardContent>
 
 				<CardActions className={classes.actions}>
+					{isAdmin && (
+						<Button color='primary' onClick={this.handleClick}>
+							{buttonEditText}
+						</Button>
+					)}
+
 					<Button
 						color='primary'
 						component={Link}
 						to={`/recipe-${id}`}
 					>
-						Виж още
+						{buttonViewText}
 					</Button>
 				</CardActions>
 			</Card>
@@ -93,7 +138,24 @@ SimpleCard.propTypes = {
 	portions: PropTypes.string,
 	ingredients: PropTypes.string,
 	instructions: PropTypes.string,
-	classes: PropTypes.object
+	classes: PropTypes.object,
+	openForm: PropTypes.func,
+	updateFormType: PropTypes.func,
+	setCurrentlyEditingId: PropTypes.func,
+	profile: PropTypes.object
 };
 
-export default withStyles(styles)(SimpleCard);
+const mapStateToProps = state => ({
+	profile: getProfile(state)
+});
+
+const mapDispatchToProps = {
+	openForm,
+	updateFormType,
+	setCurrentlyEditingId
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withStyles(styles)(SimpleCard));

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -14,6 +15,8 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
 import { form } from './constants';
+import { closeForm } from '../AddEditRecipe/actions';
+import { getFormType, getCurrentlyEditing, getRecipes } from '../App/selectors';
 
 const styles = theme => ({
 	head: {
@@ -75,13 +78,23 @@ class AddEditForm extends React.Component {
 		e.preventDefault();
 
 		const { formData } = this.state;
-		const { firestore, handleClose } = this.props;
+		const { firestore, closeForm, formType, currentlyEditing } = this.props;
 
-		// Add recipe to database
-		firestore.add('recipes', {
-			...formData,
-			timestamp: firebase.firestore.FieldValue.serverTimestamp()
-		});
+		if (formType === 'add') {
+			// Add recipe to database
+			firestore.add('recipes', {
+				...formData,
+				timestamp: firebase.firestore.FieldValue.serverTimestamp()
+			});
+		} else {
+			// Update recipe
+			firestore.update(
+				{ collection: 'recipes', doc: currentlyEditing },
+				{
+					...formData
+				}
+			);
+		}
 
 		// Reset form state
 		this.setState({
@@ -89,12 +102,42 @@ class AddEditForm extends React.Component {
 		});
 
 		// Close Drawer component
-		handleClose();
+		closeForm();
+	}
+
+	componentDidMount() {
+		const { recipes, currentlyEditing } = this.props;
+		const currentRecipe = recipes.find(
+			recipe => recipe.id === currentlyEditing
+		);
+
+		if (currentRecipe) {
+			this.setState({
+				formData: {
+					...this.state.formData,
+					title: currentRecipe.title,
+					timeToCook: currentRecipe.timeToCook,
+					portions: currentRecipe.portions,
+					ingredients: currentRecipe.ingredients,
+					instructions: currentRecipe.instructions
+				}
+			});
+		}
 	}
 
 	render() {
-		const { classes, handleClose } = this.props;
+		const {
+			classes,
+			closeForm,
+			formType,
+			recipes,
+			currentlyEditing
+		} = this.props;
 		const { formData } = this.state;
+
+		const currentRecipe = recipes.find(
+			recipe => recipe.id === currentlyEditing
+		);
 
 		return (
 			<React.Fragment>
@@ -102,7 +145,7 @@ class AddEditForm extends React.Component {
 					<Box>
 						<IconButton
 							className={classes.headIcon}
-							onClick={handleClose}
+							onClick={closeForm}
 						>
 							<IconArrowBack />
 						</IconButton>
@@ -112,7 +155,9 @@ class AddEditForm extends React.Component {
 							component='h2'
 							className={classes.headTitle}
 						>
-							{form.title}
+							{formType === 'add'
+								? form.titleAdd
+								: form.titleEdit}
 						</Typography>
 					</Box>
 				</Paper>
@@ -143,6 +188,9 @@ class AddEditForm extends React.Component {
 										FormHelperTextProps={{
 											className: classes.helperText
 										}}
+										defaultValue={
+											currentRecipe && currentRecipe[id]
+										}
 									/>
 								</FormGroup>
 							)
@@ -162,7 +210,9 @@ class AddEditForm extends React.Component {
 										: false
 								}
 							>
-								{form.button}
+								{formType === 'add'
+									? form.buttonAdd
+									: form.buttonEdit}
 							</Button>
 						</Box>
 					</form>
@@ -174,8 +224,32 @@ class AddEditForm extends React.Component {
 
 AddEditForm.propTypes = {
 	classes: PropTypes.object,
-	handleClose: PropTypes.func,
-	firestore: PropTypes.object
+	firestore: PropTypes.object,
+	closeForm: PropTypes.func,
+	formType: PropTypes.string,
+	currentlyEditing: PropTypes.string,
+	recipes: PropTypes.arrayOf(
+		PropTypes.shape({
+			title: PropTypes.string,
+			timeToCook: PropTypes.string,
+			portions: PropTypes.string,
+			ingredients: PropTypes.string,
+			instructions: PropTypes.string
+		})
+	)
 };
 
-export default firestoreConnect()(withStyles(styles)(AddEditForm));
+const mapStateToProps = state => ({
+	formType: getFormType(state),
+	currentlyEditing: getCurrentlyEditing(state),
+	recipes: getRecipes(state)
+});
+
+const mapDispatchToProps = {
+	closeForm
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(firestoreConnect()(withStyles(styles)(AddEditForm)));

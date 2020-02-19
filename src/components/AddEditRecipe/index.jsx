@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Fab from '@material-ui/core/Fab';
@@ -8,6 +9,8 @@ import Drawer from '@material-ui/core/Drawer';
 import { withStyles } from '@material-ui/core/styles';
 
 import AddEditForm from '../AddEditForm';
+import { openForm, closeForm, updateFormType } from './actions';
+import { getIsFormOpened } from '../App/selectors';
 
 const styles = theme => ({
 	fab: {
@@ -25,29 +28,18 @@ class AddEditRecipe extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			isFormOpened: false
-		};
-
 		this.handleOpen = this.handleOpen.bind(this);
-		this.handleClose = this.handleClose.bind(this);
 	}
 
 	handleOpen() {
-		this.setState({
-			isFormOpened: true
-		});
-	}
+		const { openForm, updateFormType } = this.props;
 
-	handleClose() {
-		this.setState({
-			isFormOpened: false
-		});
+		openForm();
+		updateFormType('add');
 	}
 
 	render() {
-		const { classes } = this.props;
-		const { isFormOpened } = this.state;
+		const { classes, closeForm, isFormOpened } = this.props;
 
 		return (
 			<React.Fragment>
@@ -62,11 +54,11 @@ class AddEditRecipe extends React.Component {
 				<Drawer
 					anchor='right'
 					open={isFormOpened}
-					onClose={this.handleClose}
+					onClose={closeForm}
 					className={classes.sidebar}
 				>
 					<Box className={classes.form}>
-						<AddEditForm handleClose={this.handleClose} />
+						<AddEditForm />
 					</Box>
 				</Drawer>
 			</React.Fragment>
@@ -75,7 +67,24 @@ class AddEditRecipe extends React.Component {
 }
 
 AddEditRecipe.propTypes = {
-	classes: PropTypes.object
+	classes: PropTypes.object,
+	openForm: PropTypes.func,
+	closeForm: PropTypes.func,
+	isFormOpened: PropTypes.bool,
+	updateFormType: PropTypes.func
 };
 
-export default withStyles(styles)(AddEditRecipe);
+const mapStateToProps = state => ({
+	isFormOpened: getIsFormOpened(state)
+});
+
+const mapDispatchToProps = {
+	openForm,
+	closeForm,
+	updateFormType
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withStyles(styles)(AddEditRecipe));

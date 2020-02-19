@@ -21,6 +21,15 @@ export const getFilteredRecipes = createSelector(
 	getApp,
 	({ filteredRecipes }) => filteredRecipes
 );
+export const getIsFormOpened = createSelector(
+	getApp,
+	({ isFormOpened }) => isFormOpened
+);
+export const getFormType = createSelector(getApp, ({ formType }) => formType);
+export const getCurrentlyEditing = createSelector(
+	getApp,
+	({ currentlyEditing }) => currentlyEditing
+);
 
 export const getFirestore = ({ firestore }) => firestore;
 export const getOrdered = createSelector(

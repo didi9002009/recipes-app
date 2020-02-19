@@ -1,5 +1,6 @@
 export const form = {
-	title: 'Добави рецепта',
+	titleAdd: 'Добави рецепта',
+	titleEdit: 'Промени рецепта',
 	fields: [
 		{
 			id: 'title',
@@ -28,6 +29,7 @@ export const form = {
 			multiline: true
 		}
 	],
-	button: 'Добави рецептата',
+	buttonAdd: 'Добави рецептата',
+	buttonEdit: 'Промени рецептата',
 	errorMessage: 'Полето е задължително'
 };
