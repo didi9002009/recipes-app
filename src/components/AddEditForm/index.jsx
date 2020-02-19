@@ -184,7 +184,11 @@ class AddEditForm extends React.Component {
 										rows={multiline ? 3 : null}
 										helperText={helperText}
 										required
-										autoFocus={index === 0 ? true : false}
+										autoFocus={
+											index === 0 && formType === 'add'
+												? true
+												: false
+										}
 										FormHelperTextProps={{
 											className: classes.helperText
 										}}
