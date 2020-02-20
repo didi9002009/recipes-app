@@ -6,6 +6,7 @@ import Fab from '@material-ui/core/Fab';
 import Box from '@material-ui/core/Box';
 import AddIcon from '@material-ui/icons/Add';
 import Drawer from '@material-ui/core/Drawer';
+import Snackbar from '@material-ui/core/Snackbar';
 import { withStyles } from '@material-ui/core/styles';
 
 import AddEditForm from '../AddEditForm';
@@ -16,11 +17,16 @@ const styles = theme => ({
 	fab: {
 		position: 'fixed',
 		right: theme.spacing(2),
-		bottom: theme.spacing(4),
+		bottom: theme.spacing(2),
 		zIndex: 10
 	},
 	form: {
 		width: theme.spacing(40)
+	},
+	snackbar: {
+		[theme.breakpoints.down('xs')]: {
+			bottom: theme.spacing(11.25)
+		}
 	}
 });
 
@@ -28,7 +34,16 @@ class AddEditRecipe extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.state = {
+			snackbar: {
+				isOpen: false,
+				message: ''
+			}
+		};
+
 		this.handleOpen = this.handleOpen.bind(this);
+		this.updateSnackbar = this.updateSnackbar.bind(this);
+		this.closeSnackbar = this.closeSnackbar.bind(this);
 	}
 
 	handleOpen() {
@@ -38,8 +53,26 @@ class AddEditRecipe extends React.Component {
 		updateFormType('add');
 	}
 
+	closeSnackbar() {
+		this.setState({
+			snackbar: {
+				isOpen: false
+			}
+		});
+	}
+
+	updateSnackbar(openState, message) {
+		this.setState({
+			snackbar: {
+				isOpen: openState,
+				message
+			}
+		});
+	}
+
 	render() {
 		const { classes, closeForm, isFormOpened } = this.props;
+		const { snackbar } = this.state;
 
 		return (
 			<React.Fragment>
@@ -58,9 +91,18 @@ class AddEditRecipe extends React.Component {
 					className={classes.sidebar}
 				>
 					<Box className={classes.form}>
-						<AddEditForm />
+						<AddEditForm updateSnackbar={this.updateSnackbar} />
 					</Box>
 				</Drawer>
+
+				<Snackbar
+					anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+					open={snackbar.isOpen}
+					autoHideDuration={3000}
+					message={snackbar.message}
+					onClose={this.closeSnackbar}
+					className={classes.snackbar}
+				/>
 			</React.Fragment>
 		);
 	}

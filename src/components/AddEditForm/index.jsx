@@ -14,7 +14,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
-import { form } from './constants';
+import { form, messages } from './constants';
 import { closeForm } from '../AddEditRecipe/actions';
 import { getFormType, getCurrentlyEditing, getRecipes } from '../App/selectors';
 
@@ -78,22 +78,44 @@ class AddEditForm extends React.Component {
 		e.preventDefault();
 
 		const { formData } = this.state;
-		const { firestore, closeForm, formType, currentlyEditing } = this.props;
+		const {
+			firestore,
+			closeForm,
+			formType,
+			currentlyEditing,
+			updateSnackbar
+		} = this.props;
 
 		if (formType === 'add') {
 			// Add recipe to database
-			firestore.add('recipes', {
-				...formData,
-				timestamp: firebase.firestore.FieldValue.serverTimestamp()
-			});
+			firestore
+				.add('recipes', {
+					...formData,
+					timestamp: firebase.firestore.FieldValue.serverTimestamp()
+				})
+				.then(() => {
+					updateSnackbar(true, messages.addSuccess);
+				})
+				.catch(err => {
+					console.error(err);
+					updateSnackbar(true, messages.addError);
+				});
 		} else {
 			// Update recipe
-			firestore.update(
-				{ collection: 'recipes', doc: currentlyEditing },
-				{
-					...formData
-				}
-			);
+			firestore
+				.update(
+					{ collection: 'recipes', doc: currentlyEditing },
+					{
+						...formData
+					}
+				)
+				.then(() => {
+					updateSnackbar(true, messages.editSuccess);
+				})
+				.catch(err => {
+					console.error(err);
+					updateSnackbar(true, messages.editError);
+				});
 		}
 
 		// Reset form state
@@ -240,7 +262,8 @@ AddEditForm.propTypes = {
 			ingredients: PropTypes.string,
 			instructions: PropTypes.string
 		})
-	)
+	),
+	updateSnackbar: PropTypes.func
 };
 
 const mapStateToProps = state => ({

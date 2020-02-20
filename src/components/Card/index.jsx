@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { firestoreConnect } from 'react-redux-firebase';
 
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -17,7 +18,8 @@ import {
 	timeToCookText,
 	portionsText,
 	buttonViewText,
-	buttonEditText
+	buttonEditText,
+	buttonDeleteText
 } from './constants';
 import { setCurrentlyEditingId } from './actions';
 import { openForm, updateFormType } from '../AddEditRecipe/actions';
@@ -51,10 +53,11 @@ class SimpleCard extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.handleClick = this.handleClick.bind(this);
+		this.openEdit = this.openEdit.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
 	}
 
-	handleClick() {
+	openEdit() {
 		const {
 			id,
 			openForm,
@@ -65,6 +68,12 @@ class SimpleCard extends React.Component {
 		setCurrentlyEditingId(id);
 		updateFormType('edit');
 		openForm();
+	}
+
+	handleDelete() {
+		const { id, firestore } = this.props;
+
+		firestore.delete({ collection: 'recipes', doc: id });
 	}
 
 	render() {
@@ -113,15 +122,30 @@ class SimpleCard extends React.Component {
 
 				<CardActions className={classes.actions}>
 					{isAdmin && (
-						<Button color='primary' onClick={this.handleClick}>
-							{buttonEditText}
-						</Button>
+						<React.Fragment>
+							<Button
+								color='primary'
+								onClick={this.handleDelete}
+								size='small'
+							>
+								{buttonDeleteText}
+							</Button>
+
+							<Button
+								color='primary'
+								onClick={this.openEdit}
+								size='small'
+							>
+								{buttonEditText}
+							</Button>
+						</React.Fragment>
 					)}
 
 					<Button
 						color='primary'
 						component={Link}
 						to={`/recipe-${id}`}
+						size='small'
 					>
 						{buttonViewText}
 					</Button>
@@ -142,7 +166,8 @@ SimpleCard.propTypes = {
 	openForm: PropTypes.func,
 	updateFormType: PropTypes.func,
 	setCurrentlyEditingId: PropTypes.func,
-	profile: PropTypes.object
+	profile: PropTypes.object,
+	firestore: PropTypes.object
 };
 
 const mapStateToProps = state => ({
@@ -158,4 +183,4 @@ const mapDispatchToProps = {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(withStyles(styles)(SimpleCard));
+)(firestoreConnect()(withStyles(styles)(SimpleCard)));
